@@ -5,7 +5,7 @@ module add ci
 module add gsl/2.1
 module add openmpi/1.8.8-gcc-5.2.0
 
-SOURCE_FILE=${NAME}-${VERSION}.tar.bz2
+SOURCE_FILE=${NAME}-${VERSION}.tar.gz
 
 echo "REPO_DIR is "
 echo $REPO_DIR
@@ -37,12 +37,12 @@ elif [ -e ${SRC_DIR}/${SOURCE_FILE}.lock ] ; then
 else
   echo "continuing from previous builds, using source at " ${SRC_DIR}/${SOURCE_FILE}
 fi
-tar xjf  ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE} --skip-old-files
+tar xvf  ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE} --skip-old-files
 mkdir -p ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 export LDFLAGS="-L${GSL_DIR}/lib"
 export LIBS="-lgsl -lgslcblas -lm"
-../configure --prefix=${SOFT_DIR} \ 
+../configure --prefix=${SOFT_DIR} \
  --enable-mpi \
  --enable-threads \
  --enable-gcov \
