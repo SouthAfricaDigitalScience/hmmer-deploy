@@ -3,18 +3,15 @@
 . /etc/profile.d/modules.sh
 echo ${SOFT_DIR}
 module add deploy
-
-module add ci
 module add gsl/2.1
 module add openmpi/1.8.8-gcc-5.2.0
-
-echo ${SOFT_DIR}
+echo ${DEPLOY_DIR}
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 echo "All tests have passed, will now build into ${SOFT_DIR}"
 
 export LDFLAGS="-L${GSL_DIR}/lib"
 export LIBS="-lgsl -lgslcblas -lm"
-../configure --prefix=${SOFT_DIR} \
+../configure --prefix=${DEPLOY_DIR} \
  --enable-mpi \
  --enable-threads \
  --enable-gcov \
@@ -23,7 +20,7 @@ export LIBS="-lgsl -lgslcblas -lm"
 
 make install -j2
 echo "Creating the modules file directory ${BIOINFORMATICS_MODULES}"
-mkdir -vp ${BIOINFORMATICS_MODULES}/${NAME}
+mkdir -vp modules ${BIOINFORMATICS_MODULES}/${NAME}
 (
 cat <<MODULE_FILE
 #%Module1.0
