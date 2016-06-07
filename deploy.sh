@@ -22,8 +22,8 @@ export LIBS="-lgsl -lgslcblas -lm"
 
 
 make install -j2
-echo "Creating the modules file directory ${LIBRARIES_MODULES}"
-mkdir -p ${BIOINFORMATICS_MODULES}/${NAME}
+echo "Creating the modules file directory ${BIOINFORMATICS_MODULES}"
+mkdir -vp ${BIOINFORMATICS_MODULES}/${NAME}
 (
 cat <<MODULE_FILE
 #%Module1.0
