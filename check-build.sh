@@ -35,11 +35,13 @@ prepend-path LDFLAGS           "-L${HMMER_DIR}/lib"
 MODULE_FILE
 ) > modules/$VERSION
 
-mkdir -p ${LIBRARIES_MODULES}/${NAME}
-cp modules/$VERSION ${LIBRARIES_MODULES}/${NAME}
-
+mkdir -p ${BIOINFORMATICS_MODULES}/${NAME}
+cp modules/$VERSION ${BIOINFORMATICS_MODULES}/${NAME}
+module purge
+module add ci
 # check the module
-
+module avail $NAME
 module add $NAME/$VERSION
+echo $PATH
 echo "checking if we have hmmscan"
 which hmmscan

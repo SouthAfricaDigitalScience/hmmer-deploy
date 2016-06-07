@@ -23,7 +23,7 @@ export LIBS="-lgsl -lgslcblas -lm"
 
 make install -j2
 echo "Creating the modules file directory ${LIBRARIES_MODULES}"
-mkdir -p ${LIBRARIES_MODULES}/${NAME}
+mkdir -p ${BIOINFORMATICS_MODULES}/${NAME}
 (
 cat <<MODULE_FILE
 #%Module1.0
@@ -45,9 +45,11 @@ prepend-path GCC_INCLUDE_DIR   $::env(HMMER_DIR)/include
 prepend-path CFLAGS            "-I${HMMER_DIR}/include"
 prepend-path LDFLAGS           "-L${HMMER_DIR}/lib"
 MODULE_FILE
-) > ${LIBRARIES_MODULES}/${NAME}/${VERSION}
+) > ${BIOINFORMATICS_MODULES}/${NAME}/${VERSION}
 
-
+module purge
+module add deploy
+module avail ${NAME}
 module add ${NAME}/${VERSION}
-
+echo $PATH
 which hmmscan
