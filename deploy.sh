@@ -44,6 +44,7 @@ prepend-path LD_LIBRARY_PATH   $::env(HMMER_DIR)/lib
 prepend-path GCC_INCLUDE_DIR   $::env(HMMER_DIR)/include
 prepend-path CFLAGS            "-I${HMMER_DIR}/include"
 prepend-path LDFLAGS           "-L${HMMER_DIR}/lib"
+prepend-path PATH              $::env(HMMER_DIR)/bin
 MODULE_FILE
 ) > ${BIOINFORMATICS_MODULES}/${NAME}/${VERSION}
 
