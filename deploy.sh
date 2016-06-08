@@ -11,7 +11,7 @@ echo "All tests have passed, will now build into ${SOFT_DIR}"
 
 export LDFLAGS="-L${GSL_DIR}/lib"
 export LIBS="-lgsl -lgslcblas -lm"
-../configure --prefix=${DEPLOY_DIR} \
+../configure --prefix=${SOFT_DIR} \
  --enable-mpi \
  --enable-threads \
  --enable-gcov \
@@ -45,8 +45,6 @@ prepend-path PATH              $::env(HMMER_DIR)/bin
 MODULE_FILE
 ) > ${BIOINFORMATICS_MODULES}/${NAME}/${VERSION}
 
-module purge
-module add deploy
 module avail ${NAME}
 module add ${NAME}/${VERSION}
 echo $PATH
