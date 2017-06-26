@@ -2,8 +2,8 @@
 . /etc/profile.d/modules.sh
 
 module add ci
-module add gsl/2.1
-module add openmpi/1.8.8-gcc-5.2.0
+module add gsl
+module add openmpi
 
 SOURCE_FILE=${NAME}-${VERSION}.tar.gz
 
@@ -48,4 +48,4 @@ export LIBS="-lgsl -lgslcblas -lm"
  --enable-gcov \
  --enable-gsl
 
-make -j2
+make

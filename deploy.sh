@@ -3,8 +3,8 @@
 . /etc/profile.d/modules.sh
 echo ${SOFT_DIR}
 module add deploy
-module add gsl/2.1
-module add openmpi/1.8.8-gcc-5.2.0
+module add gsl
+module add openmpi
 echo ${DEPLOY_DIR}
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 echo "All tests have passed, will now build into ${SOFT_DIR}"
@@ -18,9 +18,9 @@ export LIBS="-lgsl -lgslcblas -lm"
  --enable-gsl
 
 
-make install -j2
-echo "Creating the modules file directory ${BIOINFORMATICS_MODULES}"
-mkdir -vp modules ${BIOINFORMATICS_MODULES}/${NAME}
+make install
+echo "Creating the modules file directory ${BIOINFORMATICS}"
+mkdir -vp modules ${BIOINFORMATICS}/${NAME}
 (
 cat <<MODULE_FILE
 #%Module1.0
@@ -31,8 +31,8 @@ proc ModulesHelp { } {
     puts stderr "       that the [module-info name] module is not available"
 }
 
-module add gsl/2.1
-module add openmpi/1.8.8-gcc-5.2.0
+module add gsl
+module add openmpi
 
 module-whatis   "$NAME $VERSION."
 setenv                         HMMER_VERSION       $VERSION
@@ -43,7 +43,7 @@ prepend-path CFLAGS            "-I${HMMER_DIR}/include"
 prepend-path LDFLAGS           "-L${HMMER_DIR}/lib"
 prepend-path PATH              $::env(HMMER_DIR)/bin
 MODULE_FILE
-) > ${BIOINFORMATICS_MODULES}/${NAME}/${VERSION}
+) > ${BIOINFORMATICS}/${NAME}/${VERSION}
 
 module avail ${NAME}
 module add ${NAME}/${VERSION}

@@ -1,8 +1,8 @@
 #!/bin/bash -e
 . /etc/profile.d/modules.sh
 module add ci
-module add gsl/2.1
-module add openmpi/1.8.8-gcc-5.2.0
+module add gsl
+module add openmpi
 
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 make check
@@ -27,7 +27,7 @@ module add openmpi/1.8.8-gcc-5.2.0
 
 module-whatis   "$NAME $VERSION."
 setenv       HMMER_VERSION       $VERSION
-setenv       HMMER_DIR           /apprepo/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/$VERSION
+setenv       HMMER_DIR           /data/ci-build/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/$VERSION
 prepend-path LD_LIBRARY_PATH   $::env(HMMER_DIR)/lib
 prepend-path GCC_INCLUDE_DIR   $::env(HMMER_DIR)/include
 prepend-path CFLAGS            "-I${HMMER_DIR}/include"
