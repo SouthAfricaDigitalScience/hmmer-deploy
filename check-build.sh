@@ -36,8 +36,8 @@ prepend-path PATH              $::env(HMMER_DIR)/bin
 MODULE_FILE
 ) > modules/$VERSION
 
-mkdir -p ${BIOINFORMATICS_MODULES}/${NAME}
-cp modules/$VERSION ${BIOINFORMATICS_MODULES}/${NAME}
+mkdir -p ${BIOINFORMATICS}/${NAME}
+cp modules/$VERSION ${BIOINFORMATICS}/${NAME}
 module purge
 module add ci
 # check the module
